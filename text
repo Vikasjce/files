@@ -1,2 +1,10 @@
 https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json
 https://kaizen.itversity.com/setup-spark-development-environment-pycharm-and-python/
+
+
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("{your app name here}").getOrCreate()
+uri = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=JPY&limit=30&aggregate=1&e=CCCAGG"
+options = { 'url' : uri, 'method' : 'GET', 'readTimeout' : '10000', 'connectionTimeout' : '2000', 'partitions' : '10'}
+df = spark.read.format("org.apache.dsext.spark.datasource.rest.RestDataSource").options(**options).load()
+df.printSchema()

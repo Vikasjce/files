@@ -8,3 +8,4 @@ uri = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=JPY&limit=3
 options = { 'url' : uri, 'method' : 'GET', 'readTimeout' : '10000', 'connectionTimeout' : '2000', 'partitions' : '10'}
 df = spark.read.format("org.apache.dsext.spark.datasource.rest.RestDataSource").options(**options).load()
 df.printSchema()
+spark-shell --jars spark-datasource-rest_2.11-2.1.0-SNAPSHOT.jar --packages org.scalaj:scalaj-http_2.10:2.3.0
